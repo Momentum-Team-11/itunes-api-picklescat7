@@ -2,3 +2,13 @@
     box-sizing: border-box;
     padding: 10px; 
 }
+
+#results-container {
+    display: flex;
+    flex-wrap: wrap; 
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+    /* width: 175px; */
+    /* height: auto; */
+    /* justify-content: space-between; */
+}

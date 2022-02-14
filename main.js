@@ -9,6 +9,7 @@ let formIsValid // this is set as a global variable so it can be used in differe
 const searchTerm = document.getElementById('search-terms')
     console.log(searchTerm)
 
+
 // let searchText = searchTerm.value
 // const audioSrc = document.getElementById("myAudio").src
 //     console.log('this is the url:', audioSrc)
@@ -36,31 +37,25 @@ btn1.addEventListener("click", function (event) {
 //***how do I make this a function that listens for the click and 
 // then submits the text in the search box and 
 // makes it be the value of a variable called 'search'???
+// Clear Results
 
-
+const songDiv = document.getElementById('results-container')
 //add the submitted search terms onto the url to search the itunes api. *Review how fetch and JSON work*
 function iTunesPull(search) {
     return fetch(url+search+'&limit=20&entity=song') //limiting it to return 20 results and only audio songs
     .then(res => res.json())
     .then((data) => {
         console.log(data)
+        songDiv.innerHTML ="" 
         data.results.forEach(item => {  //this is the loop
-            //     // div and span magic here
-                const songDiv = document.getElementById('results-container')
-                        
-                    // console.log(songDiv)
-                    // console.log("nothing to see here", songDiv.innerHTML)
-                    //the += makes it loop
                     songDiv.innerHTML +=`  
                     <div class = "each-box content is-small">
                     <img src=${item.artworkUrl100} />
                     <h5><a href=${item.previewUrl}>${item.trackName}</a></h5>
                     <h3>${item.artistName}</h3>
                     </div>
-                    `
-
+                    ` 
             })
-            
   //Get the song to play */
 
 //const songClick = document.getElementById('song');

@@ -1,22 +1,38 @@
-let url = "https://itunes.apple.com/search?term="
-
+let url = "https://proxy-itunes-api.glitch.me/search?term="
+const msgDiv = document.querySelector('#msg')
+let formIsValid // this is set as a global variable so it can be used in different functions
+//const audioSrc = document.getElementById('myAudio').src
 
 // //use before search feature is working-don't forget to delete later!
-let search = "Brittany+Spears"
+//let search = "Brittany+Spears"
 
-let searchTerm = document.getElementById('search-terms')
+const searchTerm = document.getElementById('search-terms')
     console.log(searchTerm)
+
+// let searchText = searchTerm.value
+// const audioSrc = document.getElementById("myAudio").src
+//     console.log('this is the url:', audioSrc)
 
 //select the button
 let btn1= document.querySelector('button');
+//add event listener
 btn1.addEventListener("click", function (event) {
     event.preventDefault()
     console.log('Button clicked!')
-    iTunesPull(searchTerm.value)
+    //validateSearch()
+    iTunesPull(searchTerm.value) //need to learn about value. Also how does this line work?
 })
 
-
-
+//was trying to show a message when any empty search is made-  not working
+// function validateSearch() {
+//     removeMessage() // if a message is showing from a previous validation attempt
+//     formIsValid = true // reset this each time you try to validate the form
+//     if (searchTerm.value =null) {
+//         console.log('search is empty')
+//         formIsValid = false 
+//         showMessage()
+// }
+// }
 //***how do I make this a function that listens for the click and 
 // then submits the text in the search box and 
 // makes it be the value of a variable called 'search'???
@@ -37,14 +53,55 @@ function iTunesPull(search) {
                     songDiv.innerHTML +=`  
                     <div class = "each-box content is-small">
                     <img src=${item.artworkUrl100} />
-                    <h5>${item.trackName}</h5>
+                    <h5><a href=${item.previewUrl}>${item.trackName}</a></h5>
                     <h3>${item.artistName}</h3>
                     </div>
                     `
             })
+            
+  //none of this below is working- to click on link in 55 and open in player          
+//                    <h5><a href=${item.previewUrl}>${item.trackName}</a></h5>
+
+//const songClick = document.getElementById('song');
+//songClick.addEventListener("click", insertSongLink);
+
+//select the song link
+let songClick = document.querySelector('h5');
+//add event listener
+songClick.addEventListener("click", function (event) {
+    event.preventDefault()
+    console.log('link clicked!')
+    //validateSearch()
+    insertSongLink();
+    
+function insertSongLink() {
+    let songUrl = document.querySelector('a').getAttribute('href')
+    console.log("This is the URL to add audio src:", songUrl)
+    let audioSrc = document.getElementById('myAudio').src
+    console.log(audioSrc)
+    audioSrc = songUrl
+    console.log(audioSrc) 
+}
 })
+    })
 }
 
+//Part of not-working function to add/remove error message
+// function removeMessage() {
+//     if (msgDiv) {
+//     msgDiv.innerHTML = ''
+//     }
+// }
+
+// function showMessage() {  //not being called just writing it
+//     if (msgDiv) {
+//         msgDiv.innerHTML = "Enter some text and try again"
+//     }
+// }
+// //make click on track name open previewURL in audio player
+    //add click event
+    //locate 
+    //on click, add "previewURL" to 
 // fetch(iTunesPull)
 //     .then((response) => response.json())
 //     .then((data) => {

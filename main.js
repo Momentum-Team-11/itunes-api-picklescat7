@@ -44,9 +44,10 @@ function iTunesPull(search) {
     .then(res => res.json())
     .then((data) => {
         console.log(data)
-        data.results.forEach(item => {
+        data.results.forEach(item => {  //this is the loop
             //     // div and span magic here
                 const songDiv = document.getElementById('results-container')
+                        
                     // console.log(songDiv)
                     // console.log("nothing to see here", songDiv.innerHTML)
                     //the += makes it loop
@@ -57,33 +58,36 @@ function iTunesPull(search) {
                     <h3>${item.artistName}</h3>
                     </div>
                     `
+
             })
             
-  //none of this below is working- to click on link in 55 and open in player          
-//                    <h5><a href=${item.previewUrl}>${item.trackName}</a></h5>
+  //Get the song to play */
 
 //const songClick = document.getElementById('song');
 //songClick.addEventListener("click", insertSongLink);
 
-//select the song link
-let songClick = document.querySelector('h5');
+//select where to click
+let songClick = document.getElementById('results-container');
 //add event listener
 songClick.addEventListener("click", function (event) {
-    event.preventDefault()
+    event.preventDefault() //what does this do?
     console.log('link clicked!')
-    //validateSearch()
+    console.log('this is the link that is being sent to play:', event.target)
+    if(event.target.tagName === "A"){
     insertSongLink();
+    }
     
 function insertSongLink() {
-    let songUrl = document.querySelector('a').getAttribute('href')
-    console.log("This is the URL to add audio src:", songUrl)
-    let audioSrc = document.getElementById('myAudio').src
+    // let songUrl = document.querySelector('a').getAttribute('href')
+    // console.log("This is the URL to add audio src:", songUrl)
+    let audioSrc = document.getElementById('myAudio')
     console.log(audioSrc)
-    audioSrc = songUrl
+    audioSrc.src=""
+    audioSrc.src = event.target
     console.log(audioSrc) 
-}
+    }
 })
-    })
+})
 }
 
 //Part of not-working function to add/remove error message
